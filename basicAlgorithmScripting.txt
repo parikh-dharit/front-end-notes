@@ -1,0 +1,279 @@
+// <Reverse a String>
+function reverseString(str) {
+  return str.split("").reverse().join("");
+}
+
+reverseString("hello");
+
+
+// <Factorialize a Number>
+function factorialize(num) {
+  var ans=1;
+  for (var i=1; i<=num; i++){
+    ans *= i;
+  }
+  return ans;
+}
+
+factorialize(5);
+
+
+// <Check for Palindromes>
+
+function palindrome(str) {
+  // replace everything except alphnumeric characters.
+  str = str.replace(/[^a-zA-Z0-9]/g, '');
+  // convert to lower case.
+  str = str.toLowerCase();
+  if (str == str.split("").reverse().join("")) {
+    return true;
+  } else {
+    return false;
+  }
+}
+palindrome("eye");
+
+
+// <Find the Longest Word in a String>
+function findLongestWord(str) {
+  var array = str.split(' ');
+  var max = 0;
+  for (var i=0; i<array.length; i++){
+    if(array[i].length>max){
+      max = array[i].length;
+    }
+  }
+  return max;
+}
+
+findLongestWord("The quick brown fox jumped over the lazy dog");
+
+
+// <Title Case a Sentence>
+function titleCase(str) {
+  str = str.toLowerCase();
+  var array = str.split(' ');
+  var resArray = [];
+  var word;
+  for (var i=0; i<array.length; i++){
+    word = array[i][0].toUpperCase();
+    var remString = [];
+    remString.push(word);
+    remString.push(array[i].slice(1));
+    word = remString.join("");
+    resArray.push(word);
+    console.log(word);
+  }
+  str = resArray.join(" ");
+  return str;
+}
+titleCase("I'm a little tea pot");
+
+
+// <Return Largest Numbers in Arrays>
+function largestOfFour(arr) {
+  var pos = [];
+  for(var i=0; i<arr.length; i++){
+    var max = 0;
+    for(var j=0; j<arr[i].length; j++){
+      if(arr[i][j]>max){
+        max = arr[i][j];
+      }
+    }
+    pos.push(max);
+  }
+  return pos;
+}
+largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+
+
+// <Confirm the Ending>
+function confirmEnding(str, target) {
+  // "Never give up and good luck will find you."
+  // -- Falcor
+  if (str.substr(-target.length) == target){
+    return true;
+  }
+  return false;
+}
+
+confirmEnding("Bastian", "n");
+
+
+// <Repeat a string repeat a string>
+
+function repeatStringNumTimes(str, num) {
+  // repeat after me
+  var ans = "";
+  for (var i=0; i<num; i++){
+    ans += str;
+  }
+  
+  return ans;
+}
+
+repeatStringNumTimes("abc", 3);
+
+
+// <Truncate a string>
+
+function truncateString(str, num) {
+  // Clear out that junk in your trunk
+  var dots = "...";
+  if (num<=3){
+    str = str.substr(0, num);
+    str += dots;
+  }else if(num>3 && str.length>num){
+    str = str.substr(0, num-3);
+    str += dots;
+  }
+  return str;
+}
+
+truncateString("A-tisket a-tasket A green and yellow basket", 11);
+
+
+// <Chunky Monkey>
+
+function chunkArrayInGroups(arr, size) {
+  // Break it up.
+  var ansArr = [];
+  for (var i=0; i<arr.length; i+=size){
+    var subArr = [];
+    for (var j=0; j<size && (i+j)<(arr.length); j++){
+      subArr.push(arr[i+j]); 
+    }
+    ansArr.push(subArr);
+  }
+  return ansArr;
+}
+
+chunkArrayInGroups([0, 1, 2, 3, 4, 5], 4);
+//chunkArrayInGroups(["a", "b", "c", "d"], 2);
+
+
+// <Slasher Flick>
+function slasher(arr, howMany) {
+  // it doesn't always pay to be first
+  return arr.slice(howMany);
+}
+
+slasher([1, 2, 3], 2);
+
+
+// <Mutations>
+
+function mutation(arr) {
+  var str1 = arr[0];
+  str1 = str1.toLowerCase();
+  var str2 = arr[1];	
+  str2 = str2.toLowerCase();
+  var found;
+ 
+  for(var i=0; i<str2.length; i++){
+    found = str1.indexOf(str2[i]);
+    if( found === -1 ){
+      return false;
+    }
+  }
+  return true;
+}
+
+mutation(["hello", "Hello"]);
+
+
+// <Falsy Bouncer>
+function bouncer(arr) {
+  // Don't show a false ID to this bouncer.
+  /*function isTrueId(val){
+    var ans;
+    switch(val){
+      case false:
+        ans = false;
+        break;
+      case null:
+        ans = false;
+        break;
+      case 0:
+        ans = false;
+        break;
+      case "":
+        ans = false;
+        break;
+      case undefined:
+        ans = false;
+        break;
+      case NaN:
+        ans = false;
+        break;
+      default:
+        ans = true;
+    }
+    return ans;    
+  }*/
+  var filtered = arr.filter(Boolean);
+  return filtered;
+}
+bouncer([1, null, NaN, 2, undefined]);
+
+
+// <Seek and Destroy>
+
+function destroyer(arr) {
+  // Remove all the values
+  var array = Array.prototype.slice.call(arguments); // convert argument objects into an array
+  var mainArr = array.shift();
+  function rem(val){
+    if(array.indexOf(val) === -1){
+      return true;
+    }
+    return false;
+  }
+  var result = mainArr.filter(rem);
+  return result;
+}
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+
+// <Where do I belong>
+function getIndexToIns(arr, num) {
+  // Find my place in this sorted array.
+  arr.sort(function(a,b){
+    return a-b;
+  });
+  for(var i=0; i<arr.length; i++){
+    if(arr[i]>=num){
+      break;
+    }
+  }
+  return i;
+}
+
+getIndexToIns([5, 3, 20, 3], 5);
+
+
+// <Caesars Cipher>
+function rot13(str) { // LBH QVQ VG!
+  var res = "";
+  var chrCode;
+  for(var i=0; i<str.length; i++){
+    chrCode = str.charCodeAt(i);
+    if(chrCode>=65 && chrCode<=90){
+      chrCode += 13;
+      if(chrCode > 90){
+        chrCode = 64 + (chrCode - 90);
+      }
+    }
+    if (chrCode == 32){
+      res = res + ' ';
+    }else{
+      res += String.fromCharCode(chrCode);
+    }
+  }
+  return res;
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");
+
